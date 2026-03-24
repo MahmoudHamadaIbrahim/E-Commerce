@@ -1,3 +1,4 @@
+import { AllcategoryComponent } from './features/allcategory/allcategory.component';
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
@@ -41,7 +42,7 @@ export const routes: Routes = [
     title: 'Shopping Cart',
   },
   {
-    path: 'details/:id',
+    path: 'details/:id/:slug',
     loadComponent: () =>
       import('./features/details/details.component').then((m) => m.DetailsComponent),
     title: 'Product Details',
@@ -70,6 +71,18 @@ export const routes: Routes = [
         (m) => m.ForgetPasswordComponent,
       ),
     title: 'Reset Password',
+  },
+  {
+    path: 'allcategory',
+    loadComponent: () =>
+      import('./features/allcategory/allcategory.component').then((m) => m.AllcategoryComponent),
+    title: 'All category',
+  },
+  {
+    path: 'subcategory/:id',
+    loadComponent: () =>
+      import('./features/subcategory/subcategory.component').then((m) => m.SubcategoryComponent),
+    title: 'Sub Categories',
   },
   {
     path: '**',

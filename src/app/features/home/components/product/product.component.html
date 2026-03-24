@@ -1,59 +1,72 @@
 <section class="py-10">
     <div class="container">
         <div class="flex items-center gap-3">
-            <div class="w-1.5 h-8 bg-gradient-to-b from-green-start to-green-end rounded-full"></div>
+            <div class="w-1.5 h-8 bg-linear-to-b from-green-start to-green-end rounded-full"></div>
 
             <h2 class="text-2xl font-bold text-slate-800">
                 Featured <span class="text-primary">Products</span>
             </h2>
         </div>
 
-        <div class="mt-5 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <div class="mt-5 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+
+            @for (product of productList(); track product._id){
             <div
                 class="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300 group font-sans h-full flex flex-col justify-between">
 
                 <div class="relative overflow-hidden mb-4 rounded-xl">
-                    <img src="https://freshcart.codescandy.com/assets/images/products/product-img-1.jpg" alt="product"
+                    <img [src]="product.imageCover" [alt]="product.title"
                         class="w-full h-52 object-contain group-hover:scale-105 transition-transform duration-500" />
 
                     <div class="absolute top-0 right-0 flex flex-col gap-2 p-1">
                         <button
-                            class="cursor-pointer w-9 h-9 bg-white shadow-md border border-gray-50 rounded-full flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-all">
+                            class="cursor-pointer w-9 h-9 bg-white shadow-md border border-gray-50 rounded-full flex items-center justify-center text-gray-600 hover:text-danger hover:bg-white transition-all">
                             <i class="far fa-heart"></i>
                         </button>
                         <button
-                            class="cursor-pointer w-9 h-9 bg-white shadow-md border border-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-all">
+                            class="cursor-pointer w-9 h-9 bg-white shadow-md border border-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:text-primary hover:bg-white transition-all">
                             <i class="fas fa-sync-alt"></i>
                         </button>
-                        <button
-                            class="cursor-pointer w-9 h-9 bg-white shadow-md border border-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-all">
+                        <button [routerLink]="['/details', product._id, product.slug]"
+                            class="cursor-pointer w-9 h-9 bg-white shadow-md border border-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:text-primary hover:bg-white transition-all">
                             <i class="far fa-eye"></i>
                         </button>
                     </div>
                 </div>
 
                 <div class="space-y-1">
-                    <p class="text-[13px] text-gray-500">Women's Fashion</p>
+                    <p class="text-[13px] text-gray-500">{{product.category.name}}</p>
 
-                    <h3
+                    <h3 [routerLink]="['/details', product._id, product.slug]"
                         class="text-base font-semibold text-slate-800 hover:text-primary cursor-pointer transition-colors line-clamp-1">
-                        Woman Shawl
+                        {{product.title}}
                     </h3>
 
                     <div class="flex items-center gap-1 py-1">
                         <div class="flex text-yellow-400 text-2xs gap-0.5">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star text-gray-300"></i>
+                            @for (num of [1, 2, 3, 4, 5]; track $index) {
+                            <i class="fas fa-star" [class.text-yellow-400]="num <= product.ratingsAverage"
+                                [class.text-gray-300]="num > product.ratingsAverage">
+                            </i>
+                            }
                         </div>
-                        <span class="text-xs text-gray-400 font-medium">4.1 (14)</span>
+                        <span class="text-xs text-gray-400 font-medium">{{product.ratingsAverage}}
+                            ({{product.ratingsQuantity}})</span>
                     </div>
 
                     <div class="flex items-center justify-between pt-2">
                         <div class="flex flex-col">
-                            <span class="text-lg font-bold text-slate-900">191 EGP</span>
+                            <span class="text-lg font-bold transition-colors duration-300"
+                                [class.text-primary]="product.priceAfterDiscount"
+                                [class.text-slate-900]="!product.priceAfterDiscount">
+                                {{ product.price | currency }} EGP
+                            </span>
+
+                            @if (product.priceAfterDiscount) {
+                            <span class="text-sm text-gray-400 line-through decoration-gray-400/60">
+                                {{ product.priceAfterDiscount | currency }} EGP
+                            </span>
+                            }
                         </div>
 
                         <button
@@ -63,6 +76,7 @@
                     </div>
                 </div>
             </div>
+            }
         </div>
     </div>
 </section>

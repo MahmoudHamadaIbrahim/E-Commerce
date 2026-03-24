@@ -1,11 +1,9 @@
 <nav class="sticky top-0 z-40 w-full border-b border-gray-100 bg-white px-6 py-4 font-sans">
-    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4">
-        <!-- logo  -->
-        <a class="shrink-0">
+    <div class="container mx-auto flex items-center justify-between gap-4">
+        <a routerLink="/" class="shrink-0">
             <img src="/assets/fresh-logo.svg" alt="FreshCart" class="h-7 md:h-8" />
         </a>
 
-        <!-- input search  -->
         <div class="hidden lg:block grow max-w-md">
             <div class="group relative">
                 <input type="text" placeholder="Search for products..."
@@ -17,8 +15,7 @@
             </div>
         </div>
 
-        <!-- !---------------------------- links  !---------------------------- -->
-        <div class="hidden items-center gap-6 md:flex">
+        <div class="hidden items-center gap-6 lg:flex">
             <a routerLink="/" routerLinkActive="text-primary" [routerLinkActiveOptions]="{exact: true}"
                 class="font-medium text-gray-700 transition-colors hover:text-emerald-600">Home</a>
             <a routerLink="/shop" routerLinkActive="text-primary"
@@ -36,9 +33,6 @@
                             <a routerLink="/categories"
                                 class="block px-4 py-2 hover:bg-emerald-50 hover:text-emerald-600">All Categories</a>
                         </li>
-                        <li>
-                            <a class="block px-4 py-2 hover:bg-emerald-50 hover:text-emerald-600">Electronics</a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -46,41 +40,35 @@
                 class="font-medium text-gray-700 transition-colors hover:text-emerald-600">Brands</a>
         </div>
 
-        <!-- ? --------------- ICONS  & signin ? ---------------  -->
         <div class="flex items-center gap-2 md:gap-4">
             <button
                 class="flex h-10 w-10 items-center justify-center rounded-full text-gray-600 transition-all hover:bg-gray-100 lg:hidden">
                 <i class="fas fa-search text-lg"></i>
             </button>
+
             <button routerLink="/wishlist" routerLinkActive="text-primary"
-                class="relative flex h-10 w-10 items-center justify-center rounded-full text-gray-600 transition-all hover:bg-gray-100 hover:text-emerald-600">
+                class="relative flex h-10 w-10 items-center justify-center rounded-full text-gray-600 transition-all hover:bg-gray-100">
                 <i class="far fa-heart text-xl"></i>
             </button>
+
             <button routerLink="/cart" routerLinkActive="text-primary"
-                class="relative flex h-10 w-10 items-center justify-center rounded-full text-gray-600 transition-all hover:bg-gray-100 hover:text-emerald-600">
+                class="relative flex h-10 w-10 items-center justify-center rounded-full text-gray-600 transition-all hover:bg-gray-100">
                 <i class="fas fa-shopping-cart text-xl"></i>
                 <span
                     class="absolute right-1 top-1 rounded-full border-2 border-white bg-emerald-600 px-1.5 text-2xs font-bold text-white">3</span>
             </button>
 
-            <div class="hidden sm:flex items-center gap-4 pl-2 md:border-l md:border-gray-200 md:pl-4">
+            <div class="hidden lg:flex items-center gap-4 pl-4 border-l border-gray-200">
                 <a routerLink="/login" routerLinkActive="text-primary"
-                    class="flex items-center gap-2 font-medium text-gray-700 transition-colors hover:text-emerald-600">
-                    <i class="far fa-user text-lg"></i> Sign In
-                </a>
+                    class="font-medium text-gray-700 hover:text-emerald-600">Sign In</a>
                 <a routerLink="/register" routerLinkActive="text-primary"
-                    class="flex items-center gap-2 font-medium text-gray-700 transition-colors hover:text-emerald-600">
-                    <i class="fas fa-user-plus text-lg"></i> Sign Up
-                </a>
+                    class="font-medium text-gray-700 hover:text-emerald-600">Sign Up</a>
             </div>
 
-            <!-- dropdown when login -->
-
-            <!-- bars button  -->
             <button type="button" data-drawer-target="drawer-right" data-drawer-show="drawer-right"
                 data-drawer-placement="right"
-                class="p-2 text-gray-600 hover:text-emerald-600 md:hidden focus:outline-none transition-colors">
-                <i class="fas fa-bars text-2xl"></i>
+                class="cursor-pointer flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white shadow-md transition-all hover:bg-primary/90 lg:hidden">
+                <i class="fas fa-bars text-xl"></i>
             </button>
         </div>
     </div>
@@ -89,14 +77,15 @@
 <!-- --------------- navbar responsive ---------------- -->
 
 <div id="drawer-right"
-    class="fixed top-0 right-0 z-50 h-screen w-80 translate-x-full overflow-y-auto bg-white p-6 shadow-2xl transition-transform"
+    class="fixed top-0 right-0 z-100 h-screen w-80 translate-x-full overflow-y-auto bg-white p-6 shadow-2xltransition-transform duration-700 ease-in-out lg:hidden"
     tabindex="-1">
+
     <!-- logo  -->
     <div class="mb-8 flex items-center justify-between">
         <img src="/assets/fresh-logo.svg" alt="Logo" class="h-7" />
         <button type="button" data-drawer-hide="drawer-right"
             class="rounded-full bg-gray-100 p-2 text-gray-400 hover:bg-gray-200">
-            <i class="fas fa-times"></i>
+            <i class="fas fa-times cursor-pointer"></i>
         </button>
     </div>
 
