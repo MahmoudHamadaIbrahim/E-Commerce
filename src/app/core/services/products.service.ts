@@ -16,4 +16,15 @@ export class ProductsService {
   getSpecificProduct(productId: string): Observable<any> {
     return this.httpClient.get(environment.baseUrl + `/api/v1/products/${productId}`);
   }
+
+  getProductReviews(id: string): Observable<any> {
+    return this.httpClient.get(environment.baseUrl + `/api/v1/products/${id}/reviews`);
+  }
+
+  createReview(productId: string, reviewData: { review: string; rating: number }): Observable<any> {
+    return this.httpClient.post(
+      environment.baseUrl + `/api/v1/products/${productId}/reviews`,
+      reviewData,
+    );
+  }
 }

@@ -1,4 +1,3 @@
-import { AllcategoryComponent } from './features/allcategory/allcategory.component';
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
@@ -73,16 +72,24 @@ export const routes: Routes = [
     title: 'Reset Password',
   },
   {
-    path: 'allcategory',
-    loadComponent: () =>
-      import('./features/allcategory/allcategory.component').then((m) => m.AllcategoryComponent),
-    title: 'All category',
-  },
-  {
     path: 'subcategory/:id',
     loadComponent: () =>
       import('./features/subcategory/subcategory.component').then((m) => m.SubcategoryComponent),
     title: 'Sub Categories',
+  },
+  {
+    path: 'specific-category/:id',
+    loadComponent: () =>
+      import('./features/specific-category/specific-category.component').then(
+        (m) => m.SpecificCategoryComponent,
+      ),
+    title: 'Specific Categories',
+  },
+  {
+    path: 'products',
+    loadComponent: () =>
+      import('./features/products/products.component').then((m) => m.ProductsComponent),
+    title: 'Products',
   },
   {
     path: '**',

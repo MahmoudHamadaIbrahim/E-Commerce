@@ -1,20 +1,21 @@
-<section class="py-10">
+<section class="py-5">
     <div class="container">
-        <div class="flex items-center gap-3">
-            <div class="w-1.5 h-8 bg-linear-to-b from-green-start to-green-end rounded-full"></div>
 
-            <h2 class="text-2xl font-bold text-slate-800">
-                Featured <span class="text-primary">Products</span>
-            </h2>
-        </div>
+        <div class="mt-5 grid gap-6" [class]="gridCols()">
 
-        <div class="mt-5 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-
-            @for (product of productList(); track product._id){
+            @for (product of productList(); track product._id) {
             <div
                 class="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300 group font-sans h-full flex flex-col justify-between">
 
-                <div class="relative overflow-hidden mb-4 rounded-xl">
+                <div class="relative overflow-hidden mb-4 rounded-xl bg-gray-50 flex items-center justify-center">
+
+                    @if (product.priceAfterDiscount) {
+                    <div
+                        class="absolute top-2 left-2 bg-[#ff3344] text-white text-[11px] font-bold px-2 py-1 rounded z-10">
+                        -{{ getDiscountPercent(product.price, product.priceAfterDiscount) }}%
+                    </div>
+                    }
+
                     <img [src]="product.imageCover" [alt]="product.title"
                         class="w-full h-52 object-contain group-hover:scale-105 transition-transform duration-500" />
 
@@ -55,22 +56,24 @@
                     </div>
 
                     <div class="flex items-center justify-between pt-2">
-                        <div class="flex flex-col">
-                            <span class="text-lg font-bold transition-colors duration-300"
-                                [class.text-primary]="product.priceAfterDiscount"
-                                [class.text-slate-900]="!product.priceAfterDiscount">
+
+                        <div class="flex items-end gap-2 flex-wrap">
+                            @if (product.priceAfterDiscount) {
+                            <span class="text-lg font-bold text-primary">
+                                {{ product.priceAfterDiscount | currency }} EGP
+                            </span>
+                            <span class="text-sm font-medium text-gray-400 line-through decoration-gray-400/60 pb-0.5">
                                 {{ product.price | currency }} EGP
                             </span>
-
-                            @if (product.priceAfterDiscount) {
-                            <span class="text-sm text-gray-400 line-through decoration-gray-400/60">
-                                {{ product.priceAfterDiscount | currency }} EGP
+                            } @else {
+                            <span class="text-lg font-bold text-slate-900">
+                                {{ product.price | currency }} EGP
                             </span>
                             }
                         </div>
 
                         <button
-                            class="cursor-pointer w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 active:scale-90">
+                            class="cursor-pointer w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 active:scale-90 shrink-0">
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>

@@ -1,0 +1,168 @@
+<div class="animate-fade-in space-y-10">
+
+    <div class="flex flex-col md:flex-row items-center gap-12 pb-12 border-b border-gray-100">
+
+        <div class="text-center space-y-3 min-w-[150px]">
+            <h2 class="text-7xl font-black text-slate-800 tracking-tighter">
+                {{ productDetails().ratingsAverage }}
+            </h2>
+            <div class="flex text-amber-400 text-xl justify-center gap-1">
+                @for (num of [1, 2, 3, 4, 5]; track $index) {
+                <i class="fas fa-star" [class.text-amber-400]="num <= productDetails().ratingsAverage"
+                    [class.text-gray-200]="num > productDetails().ratingsAverage"></i>
+                }
+            </div>
+            <p class="text-sm text-gray-400 font-bold uppercase tracking-widest">
+                {{ productDetails().ratingsQuantity }} Reviews
+            </p>
+        </div>
+
+        <div class="flex-1 w-full max-w-md space-y-4">
+            @for (star of [5, 4, 3, 2, 1]; track star) {
+            <div class="flex items-center gap-4 group">
+                <span class="text-xs font-bold text-gray-500 w-12">{{ star }} star</span>
+
+                <div class="flex-1 h-2.5 bg-gray-100 rounded-full overflow-hidden shadow-inner">
+                    <div class="h-full bg-amber-400 rounded-full transition-all duration-1000 ease-out"
+                        [style.width.%]="$any(reviewStats())[star].percent">
+                    </div>
+                </div>
+
+                <span class="text-xs font-black text-slate-400 w-10 text-right">
+                    {{ $any(reviewStats())[star].percent | number:'1.0-0' }}%
+                </span>
+            </div>
+            }
+        </div>
+    </div>
+
+
+    <div class="space-y-6">
+        <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+            <h4 class="text-lg font-bold text-slate-800">Customer Reviews</h4>
+
+            <div class="flex items-center gap-3">
+                <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-lg">
+                    {{ allReviews().length }} Total
+                </span>
+
+                @if (showAllReviews()) {
+                <button (click)="toggleReviews()"
+                    class="bg-gray-100 hover:bg-red-50 text-gray-400 hover:text-red-500 rounded-full w-7 h-7 flex items-center justify-center transition-all cursor-pointer border-none outline-none">
+                    <i class="fa-solid fa-xmark text-[10px]"></i>
+                </button>
+                }
+            </div>
+        </div>
+
+
+
+        <div class="space-y-4">
+            @if (!showAllReviews() && allReviews().length > 0) {
+            <div class="bg-[#F0F2F5] p-4 rounded-[20px] animate-fade-in w-full md:max-w-2xl">
+
+                <div class="flex items-start justify-between mb-2">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="size-9 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center font-bold text-sm shrink-0 border border-white shadow-sm">
+                            {{ allReviews()[0].user.name.charAt(0).toUpperCase() }}
+                        </div>
+
+                        <div class="flex flex-col">
+                            <span class="font-bold text-[13px] text-slate-900 leading-tight">
+                                {{ allReviews()[0].user.name }}
+                            </span>
+                            <div class="flex text-amber-400 text-[9px] gap-0.5 mt-0.5">
+                                @for (s of [1,2,3,4,5]; track $index) {
+                                <i class="fas fa-star" [class.text-gray-300]="s > allReviews()[0].rating"></i>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <span class="text-[10px] font-medium text-slate-400 bg-white/50 px-2 py-1 rounded-lg shadow-sm">
+                        {{ allReviews()[0].createdAt | date:'MMM d, y' }}
+                    </span>
+                </div>
+
+                <p class="text-[14px] text-slate-800 pl-12 leading-relaxed">
+                    {{ allReviews()[0].review }}
+                </p>
+            </div>
+
+            <button (click)="toggleReviews()"
+                class="text-emerald-600 font-bold text-sm hover:underline cursor-pointer flex items-center gap-1 ml-4 mt-2">
+                View all reviews <i class="fas fa-chevron-down text-[10px]"></i>
+            </button>
+            }
+
+            @if (showAllReviews()) {
+            <div class="space-y-4 animate-fade-in">
+                @for (review of allReviews(); track review._id) {
+                <div class="bg-[#F0F2F5] p-4 rounded-[20px] animate-fade-in mb-3">
+                    <div class="flex items-center gap-3 mb-2">
+
+                        <div
+                            class="size-8 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center font-bold text-sm shrink-0 border border-white shadow-sm">
+                            {{ review.user.name.charAt(0).toUpperCase() }}
+                        </div>
+
+                        <div class="flex flex-col">
+                            <span class="font-bold text-[13px] text-slate-900 leading-tight">
+                                {{ review.user.name }}
+                            </span>
+                            <div class="flex text-amber-400 text-[9px] gap-0.5 mt-0.5">
+                                @for (s of [1,2,3,4,5]; track $index) {
+                                <i class="fas fa-star" [class.text-gray-300]="s > review.rating"></i>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-[14px] text-slate-800 pl-11">
+                        {{ review.review }}
+                    </p>
+                </div>
+                }
+
+                <button (click)="toggleReviews()"
+                    class="text-gray-400 font-bold text-xs hover:text-emerald-600 cursor-pointer ml-4">
+                    Show less
+                </button>
+            </div>
+            }
+        </div>
+    </div>
+
+    <div class="flex gap-3 pt-6 border-t border-gray-100">
+        <div
+            class="size-9 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center font-bold text-sm shrink-0 border border-white shadow-sm">
+            M
+        </div>
+
+        <div
+            class="flex-1 bg-[#F0F2F5] rounded-[20px] flex flex-col p-2 focus-within:bg-white focus-within:ring-1 focus-within:ring-emerald-200 transition-all shadow-inner">
+            <textarea [formControl]="userReview"
+                class="w-full bg-transparent border-none text-[14px] text-slate-800 placeholder-slate-500 resize-none outline-none px-3 py-2"
+                placeholder="Write a review..." rows="2">
+        </textarea>
+
+            <div class="flex items-center justify-between px-3 pb-2">
+                <div class="flex gap-1.5">
+                    @for (star of [1,2,3,4,5]; track star) {
+                    <i class="fa-star cursor-pointer text-sm transition-transform hover:scale-120"
+                        [class.fas]="star <= userRating()" [class.far]="star > userRating()"
+                        [class.text-amber-400]="star <= userRating()" [class.text-gray-300]="star > userRating()"
+                        (click)="userRating.set(star)">
+                    </i>
+                    }
+                </div>
+
+                <button (click)="sendReview(productDetails().id)" [disabled]="userReview.invalid"
+                    class="bg-emerald-500 text-white size-8 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-all disabled:opacity-30 disabled:grayscale cursor-pointer shadow-md">
+                    <i class="fas fa-paper-plane text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

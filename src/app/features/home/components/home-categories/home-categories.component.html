@@ -8,7 +8,7 @@
                     Shop By <span class="text-primary">Category</span>
                 </h2>
             </div>
-            <a routerLink="/allcategory"
+            <a routerLink="/categories"
                 class="flex items-center gap-2 text-primary font-semibold hover:underline cursor-pointer transition-all">
                 View All Categories
                 <i class="fas fa-arrow-right text-sm"></i>
@@ -17,7 +17,8 @@
 
         <div class="mt-6 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
             @for (category of categoriesList(); track category._id) {
-            <div class="shadow rounded p-4 text-center flex flex-col items-center">
+            <div [routerLink]="['/subcategory', category._id]"
+                class="shadow rounded p-4 text-center flex flex-col items-center border border-gray-100 hover:border-primary/50 hover:shadow-xl transition-all duration-500 group cursor-pointer">
                 <img [src]="category.image" class="size-20 rounded-full" [alt]="category.name" />
                 <h3 class="mt-2 font-semibold">{{category.name}}</h3>
             </div>
@@ -48,7 +49,7 @@
                     </div>
 
                     <div class="mt-auto">
-                        <a href="#"
+                        <a routerLink="/products"
                             class="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-[#088a50] transition hover:bg-gray-100 shadow-sm">
                             Shop Now
                             <i class="fa-solid fa-arrow-right"></i>
@@ -81,7 +82,7 @@
                     </div>
 
                     <div class="mt-auto">
-                        <a href="#"
+                        <a routerLink="/products"
                             class="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-[#f25c4e] transition hover:bg-gray-100 shadow-sm">
                             Explore Now
                             <i class="fa-solid fa-arrow-right"></i>

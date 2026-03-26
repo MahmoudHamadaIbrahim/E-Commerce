@@ -3,9 +3,9 @@
 
         @if (categoryDetails()) {
         <nav class="flex items-center gap-2 text-sm text-green-50/80 mb-6">
-            <a routerLink="/home" class="hover:text-white">Home</a>
+            <a routerLink="/" class="hover:text-white">Home</a>
             <span>/</span>
-            <a routerLink="/allcategory" class="hover:text-white">Categories</a>
+            <a routerLink="/categories" class="hover:text-white">Categories</a>
             <span>/</span>
             <span class="text-white font-medium">{{ categoryDetails().name }}</span>
         </nav>
@@ -35,35 +35,39 @@
 </header>
 
 <div class="container mx-auto py-10 px-4 min-h-[50vh]">
-    <a routerLink="/allcategory"
+    <a routerLink="/categories"
         class="cursor-pointer flex items-center gap-2 text-slate-600 hover:text-primary font-medium transition-colors mb-12">
         <i class="fas fa-arrow-left"></i> Back to Categories
     </a>
 
     @if (subCategories().length > 0) {
-    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         @for (sub of subCategories(); track sub._id) {
         <div
-            class="p-6 bg-white border border-gray-100 rounded-2xl shadow-xs text-center hover:border-primary hover:shadow-md transition-all cursor-pointer">
-            <h3 class="font-bold text-slate-800">{{ sub.name }}</h3>
+            class="group relative p-6 bg-white border border-gray-100 rounded-3xl transition-all duration-300 cursor-pointer hover:border-primary/50 hover:shadow-xl hover:border-primary-200  flex flex-col items-start min-h-55 hover:-translate-y-2">
+
+            <div
+                class="size-14 bg-emerald-50 rounded-2xl flex items-center justify-center mb-6 transition-colors duration-300">
+                <i class="fas fa-folder text-primary text-xl transition-colors duration-300"></i>
+            </div>
+
+            <h3
+                class="text-xl font-bold text-slate-800 transition-colors duration-300 group-hover:text-primary leading-tight">
+                {{ sub.name }}
+            </h3>
+
+            <div
+                class="mt-auto pt-4 opacity-0 transform translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+                <div [routerLink]="['/specific-category', sub._id]"
+                    class="flex items-center gap-2 text-primary font-bold text-sm">
+                    <span>Browse Products</span>
+                    <i class="fas fa-arrow-right text-xs"></i>
+                </div>
+            </div>
+
         </div>
         }
     </div>
     } @else {
-    <div class="flex flex-col items-center justify-center py-16 animate-fade-in">
-        <div class="h-24 w-24 bg-gray-50 rounded-full flex items-center justify-center mb-6">
-            <i class="fas fa-folder-open text-4xl text-slate-300"></i>
-        </div>
-
-        <h2 class="text-2xl font-bold text-slate-800">No Subcategories Found</h2>
-        <p class="text-slate-400 mt-2 max-w-sm text-center">
-            This category doesn't have any subcategories yet.
-        </p>
-
-        <button
-            class="cursor-pointer mt-8 bg-primary text-white px-10 py-3.5 rounded-xl font-bold shadow-lg hover:bg-green-700 active:scale-95 transition-all">
-            View All Products in {{ categoryDetails().name }}
-        </button>
-    </div>
     }
 </div>
