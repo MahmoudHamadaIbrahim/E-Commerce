@@ -1,5 +1,5 @@
 import { Component, computed, inject, input, OnInit, signal } from '@angular/core';
-import { ProductsService } from '../../../../core/services/products.service';
+import { ProductsService } from '../../../../../../core/services/products.service';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DatePipe, DecimalPipe } from '@angular/common';
 

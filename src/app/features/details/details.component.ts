@@ -1,22 +1,23 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ProductsService } from '../../core/services/products.service';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Product } from '../../core/models/product.interface';
 import { CurrencyPipe } from '@angular/common';
-import { ReviewsComponent } from './components/reviews/reviews.component';
+import { ReviewsComponent } from './components/product-info/components/reviews/reviews.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { ActivatedRoute } from '@angular/router';
+import { ProductsService } from '../../core/services/products.service';
+import { ProductPhotosComponent } from './components/product-photos/product-photos.component';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [CurrencyPipe, ReviewsComponent],
+  imports: [CurrencyPipe, ReviewsComponent, ProductDetailsComponent, ProductPhotosComponent],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css',
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent {
+  productDetails = signal<Product>({} as Product);
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly productsService = inject(ProductsService);
-  quantity = signal<number>(1);
-  productDetails = signal<Product>({} as Product);
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
@@ -36,22 +37,6 @@ export class DetailsComponent implements OnInit {
         console.log(err);
       },
     });
-  }
-
-  totalPrice = computed(() => {
-    return this.productDetails().price * this.quantity();
-  });
-
-  increaseQty() {
-    if (this.quantity() < this.productDetails().quantity) {
-      this.quantity.update((q) => q + 1);
-    }
-  }
-
-  decreaseQty() {
-    if (this.quantity() > 1) {
-      this.quantity.update((q) => q - 1);
-    }
   }
 
   activeTab = signal<string>('details');

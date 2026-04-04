@@ -1,0 +1,24 @@
+<div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-12">
+    <div class="space-y-4">
+        <div
+            class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 sticky top-4 flex flex-col items-center mb-4">
+
+            <div class="w-full flex items-center justify-center mb-6 overflow-hidden">
+                <img [src]="productDetails().imageCover" [alt]="productDetails().title"
+                    class="h-auto max-h-112.5 w-auto max-w-full object-contain mx-auto transition-all duration-500">
+            </div>
+
+            <div class="flex flex-wrap gap-2 justify-center w-full pt-4 border-t border-gray-50">
+                @for (img of productDetails().images; track $index) {
+                <button (click)="productDetails().imageCover = img"
+                    class="size-16 rounded-lg overflow-hidden border-2 transition-all cursor-pointer"
+                    [class.border-emerald-500]="productDetails().imageCover === img"
+                    [class.border-transparent]="productDetails().imageCover !== img">
+                    <img [src]="img" class="w-full h-full object-cover">
+                </button>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
