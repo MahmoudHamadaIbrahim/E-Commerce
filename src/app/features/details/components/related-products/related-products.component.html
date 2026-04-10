@@ -27,7 +27,7 @@
                     class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-xl transition-all duration-300 h-full flex flex-col justify-between">
 
                     <div
-                        class="relative overflow-hidden mb-6 rounded-xl bg-white flex items-center justify-center aspect-[4/5]">
+                        class="relative overflow-hidden mb-6 rounded-xl bg-white flex items-center justify-center aspect-4/5">
 
                         @if (product.priceAfterDiscount) {
                         <div
@@ -67,7 +67,7 @@
                         </h3>
 
                         <div class="flex items-center gap-1.5 py-1">
-                            <div class="flex text-amber-400 text-[10px] gap-0.5">
+                            <div class="flex text-amber-400 text-2xs gap-0.5">
                                 @for (star of [1, 2, 3, 4, 5]; track star) {
                                 <i class="fas fa-star" [class.text-amber-400]="star <= product.ratingsAverage"
                                     [class.text-gray-200]="star > product.ratingsAverage">

@@ -2,7 +2,7 @@
 
     <div class="flex flex-col md:flex-row items-center gap-12 pb-12 border-b border-gray-100">
 
-        <div class="text-center space-y-3 min-w-[150px]">
+        <div class="text-center space-y-3 min-w-37.5">
             <h2 class="text-7xl font-black text-slate-800 tracking-tighter">
                 {{ productDetails().ratingsAverage }}
             </h2>
@@ -49,7 +49,7 @@
                 @if (showAllReviews()) {
                 <button (click)="toggleReviews()"
                     class="bg-gray-100 hover:bg-red-50 text-gray-400 hover:text-red-500 rounded-full w-7 h-7 flex items-center justify-center transition-all cursor-pointer border-none outline-none">
-                    <i class="fa-solid fa-xmark text-[10px]"></i>
+                    <i class="fa-solid fa-xmark text-2xs"></i>
                 </button>
                 }
             </div>
@@ -80,7 +80,7 @@
                         </div>
                     </div>
 
-                    <span class="text-[10px] font-medium text-slate-400 bg-white/50 px-2 py-1 rounded-lg shadow-sm">
+                    <span class="text-2xs] font-medium text-slate-400 bg-white/50 px-2 py-1 rounded-lg shadow-sm">
                         {{ allReviews()[0].createdAt | date:'MMM d, y' }}
                     </span>
                 </div>
@@ -92,7 +92,7 @@
 
             <button (click)="toggleReviews()"
                 class="text-emerald-600 font-bold text-sm hover:underline cursor-pointer flex items-center gap-1 ml-4 mt-2">
-                View all reviews <i class="fas fa-chevron-down text-[10px]"></i>
+                View all reviews <i class="fas fa-chevron-down text-2xs"></i>
             </button>
             }
 
