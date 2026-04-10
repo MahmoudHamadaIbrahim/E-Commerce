@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { Product } from '../../../../core/models/product.interface';
 
 @Component({
   selector: 'app-product-info',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './product-info.component.html',
   styleUrl: './product-info.component.css',
 })
-export class ProductInfoComponent {}
+export class ProductInfoComponent {
+  productDetails = input.required<Product>();
+}

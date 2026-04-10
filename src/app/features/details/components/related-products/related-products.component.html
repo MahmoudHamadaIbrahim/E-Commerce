@@ -1,0 +1,109 @@
+<section id="similar-products" class="py-10">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center mb-8 px-2">
+            <div class="flex items-center gap-3">
+                <div class="h-8 w-1.5 bg-emerald-500 rounded-full"></div>
+                <h2 class="text-2xl font-bold text-gray-800">You May Also <span class="text-emerald-500">Like</span>
+                </h2>
+            </div>
+            <div class="flex space-x-2">
+                <button (click)="moveSlider('prev')"
+                    class="h-10 w-10 rounded-full bg-gray-50 text-gray-400 hover:bg-white hover:shadow-md transition-all cursor-pointer border-none outline-none flex items-center justify-center">
+                    <i class="fas fa-chevron-left text-sm"></i>
+                </button>
+                <button (click)="moveSlider('next')"
+                    class="h-10 w-10 rounded-full bg-gray-50 text-gray-400 hover:bg-white hover:shadow-md transition-all cursor-pointer border-none outline-none flex items-center justify-center">
+                    <i class="fas fa-chevron-right text-sm"></i>
+                </button>
+            </div>
+        </div>
+
+        <div #slider class="flex gap-6 overflow-hidden scroll-smooth snap-x snap-mandatory pb-6">
+
+            @for (product of relatedProducts(); track product._id) {
+            <div class="product-card min-w-[calc((100%-48px)/3)] snap-start group">
+
+                <div
+                    class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-xl transition-all duration-300 h-full flex flex-col justify-between">
+
+                    <div
+                        class="relative overflow-hidden mb-6 rounded-xl bg-white flex items-center justify-center aspect-[4/5]">
+
+                        @if (product.priceAfterDiscount) {
+                        <div
+                            class="absolute top-3 left-3 bg-[#ff3344] text-white text-[11px] font-bold px-2 py-1 rounded z-10">
+                            -{{ ((product.price - product.priceAfterDiscount) / product.price) * 100 | number:'1.0-0'
+                            }}%
+                        </div>
+                        }
+
+                        <img [src]="product.imageCover" [alt]="product.title"
+                            class="w-full h-64 object-contain group-hover:scale-105 transition-transform duration-500" />
+
+                        <div class="absolute top-0 right-0 flex flex-col gap-2 p-0">
+                            <button
+                                class="w-9 h-9 bg-white shadow-sm border border-gray-100 rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-all cursor-pointer border-none">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button
+                                class="w-9 h-9 bg-white shadow-sm border border-gray-100 rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-500 transition-all cursor-pointer border-none">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                            <button [routerLink]="['/details', product._id, product.slug]"
+                                class="w-9 h-9 bg-white shadow-sm border border-gray-100 rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-500 transition-all cursor-pointer border-none">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1 text-left px-1">
+                        <p class="text-xs text-gray-400 font-medium uppercase tracking-wide">
+                            {{ product.category.name }}
+                        </p>
+
+                        <h3 [routerLink]="['/details', product._id, product.slug]"
+                            class="text-base font-bold text-slate-800 hover:text-emerald-600 cursor-pointer transition-colors line-clamp-1">
+                            {{ product.title }}
+                        </h3>
+
+                        <div class="flex items-center gap-1.5 py-1">
+                            <div class="flex text-amber-400 text-[10px] gap-0.5">
+                                @for (star of [1, 2, 3, 4, 5]; track star) {
+                                <i class="fas fa-star" [class.text-amber-400]="star <= product.ratingsAverage"
+                                    [class.text-gray-200]="star > product.ratingsAverage">
+                                </i>
+                                }
+                            </div>
+                            <span class="text-[11px] text-gray-400 font-bold">
+                                {{product.ratingsAverage}} ({{product.ratingsQuantity}})
+                            </span>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-3">
+                            <div class="flex flex-col">
+                                @if (product.priceAfterDiscount) {
+                                <span class="text-lg font-black text-emerald-600">
+                                    {{ product.priceAfterDiscount }} EGP
+                                </span>
+                                <span class="text-xs text-gray-400 line-through">
+                                    {{ product.price }} EGP
+                                </span>
+                                } @else {
+                                <span class="text-lg font-black text-slate-900">
+                                    {{ product.price }} EGP
+                                </span>
+                                }
+                            </div>
+
+                            <button
+                                class="size-11 bg-emerald-500 text-white rounded-full flex items-center justify-center hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-500/20 active:scale-90 shrink-0 border-none cursor-pointer">
+                                <i class="fas fa-plus text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</section>

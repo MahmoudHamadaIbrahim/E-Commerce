@@ -6,11 +6,21 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../core/services/products.service';
 import { ProductPhotosComponent } from './components/product-photos/product-photos.component';
+import { DetailsInfoComponent } from './components/product-info/components/details-info/details-info.component';
+import { ShippingComponent } from './components/product-info/components/shipping/shipping.component';
+import { RelatedProductsComponent } from './components/related-products/related-products.component';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [CurrencyPipe, ReviewsComponent, ProductDetailsComponent, ProductPhotosComponent],
+  imports: [
+    ReviewsComponent,
+    ProductDetailsComponent,
+    ProductPhotosComponent,
+    DetailsInfoComponent,
+    ShippingComponent,
+    RelatedProductsComponent,
+  ],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css',
 })

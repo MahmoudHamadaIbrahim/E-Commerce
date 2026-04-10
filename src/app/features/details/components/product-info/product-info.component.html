@@ -1,1 +1,15 @@
-<p>product-info works!</p>
+<div class="bg-gray-50/50 p-6 rounded-xl space-y-4">
+    <h4 class="font-bold text-slate-800 border-b border-gray-200 pb-2">Product Information</h4>
+    <div class="space-y-3 text-sm">
+        <div class="flex justify-between"><span class="text-gray-400 font-medium">Category</span><span
+                class="text-slate-700 font-bold">{{productDetails().category.name}}</span></div>
+        <div class="flex justify-between"><span class="text-gray-400 font-medium">Subcategory</span><span
+                class="text-slate-700 font-bold">{{productDetails().subcategory[0].name}}</span>
+        </div>
+        <div class="flex justify-between"><span class="text-gray-400 font-medium">Brand</span><span
+                class="text-slate-700 font-bold">{{productDetails().brand.name}}</span></div>
+        <div class="flex justify-between"><span class="text-gray-400 font-medium">Items
+                Sold</span><span class="text-slate-700 font-bold">{{productDetails().sold}}+
+                sold</span></div>
+    </div>
+</div>

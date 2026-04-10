@@ -29,53 +29,7 @@
 
             <div class="p-8">
                 @if (activeTab() === 'details') {
-                <div class="space-y-8 animate-fade-in">
-                    <div>
-                        <h3 class="text-xl font-bold text-slate-800 mb-4">About this Product</h3>
-                        <p class="text-gray-500 leading-relaxed text-justify">
-                            {{ productDetails().description }}
-                        </p>
-                    </div>
-
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div class="bg-gray-50/50 p-6 rounded-xl space-y-4">
-                            <h4 class="font-bold text-slate-800 border-b border-gray-200 pb-2">Product Information</h4>
-                            <div class="space-y-3 text-sm">
-                                <div class="flex justify-between"><span
-                                        class="text-gray-400 font-medium">Category</span><span
-                                        class="text-slate-700 font-bold">{{productDetails().category.name}}</span></div>
-                                <div class="flex justify-between"><span
-                                        class="text-gray-400 font-medium">Subcategory</span><span
-                                        class="text-slate-700 font-bold">{{productDetails().subcategory[0].name}}</span>
-                                </div>
-                                <div class="flex justify-between"><span
-                                        class="text-gray-400 font-medium">Brand</span><span
-                                        class="text-slate-700 font-bold">{{productDetails().brand.name}}</span></div>
-                                <div class="flex justify-between"><span class="text-gray-400 font-medium">Items
-                                        Sold</span><span class="text-slate-700 font-bold">{{productDetails().sold}}+
-                                        sold</span></div>
-                            </div>
-                        </div>
-
-                        <div class="bg-gray-50/50 p-6 rounded-xl space-y-4">
-                            <h4 class="font-bold text-slate-800 border-b border-gray-200 pb-2">Key Features</h4>
-                            <ul class="space-y-3">
-                                <li class="flex items-center gap-3 text-sm text-gray-600 font-medium">
-                                    <i class="fas fa-check text-emerald-500"></i> Premium Quality Product
-                                </li>
-                                <li class="flex items-center gap-3 text-sm text-gray-600 font-medium">
-                                    <i class="fas fa-check text-emerald-500"></i> 100% Authentic Guarantee
-                                </li>
-                                <li class="flex items-center gap-3 text-sm text-gray-600 font-medium">
-                                    <i class="fas fa-check text-emerald-500"></i> Fast & Secure Packaging
-                                </li>
-                                <li class="flex items-center gap-3 text-sm text-gray-600 font-medium">
-                                    <i class="fas fa-check text-emerald-500"></i> Quality Tested
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <app-details-info [productDetails]="productDetails()"></app-details-info>
                 }
 
                 @if (activeTab() === 'reviews') {
@@ -83,91 +37,12 @@
                 }
 
                 @if (activeTab() === 'shipping') {
-                <div class="space-y-6 animate-fade-in text-slate-800">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                        <div
-                            class="bg-emerald-50/50 border border-emerald-100 p-8 rounded-3xl transition-all hover:shadow-sm">
-                            <div class="flex items-center gap-4 mb-8">
-                                <div
-                                    class="size-12 bg-emerald-600 text-white rounded-full flex items-center justify-center shrink-0 shadow-inner">
-                                    <i class="fas fa-shipping-fast text-xl"></i>
-                                </div>
-                                <h3 class="text-xl font-bold tracking-tight text-slate-900">Shipping Information</h3>
-                            </div>
-
-                            <ul class="space-y-4 text-[15px] text-slate-700">
-                                <li class="flex items-start gap-3">
-                                    <i class="fas fa-check text-emerald-500 text-xs mt-1"></i>
-                                    <span>Free shipping on orders over <strong
-                                            class="text-slate-900">$50</strong></span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fas fa-check text-emerald-500 text-xs mt-1"></i>
-                                    <span>Standard delivery: 3-5 business days</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fas fa-check text-emerald-500 text-xs mt-1"></i>
-                                    <span>Express delivery available (1-2 business days)</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fas fa-check text-emerald-500 text-xs mt-1"></i>
-                                    <span>Track your order in real-time</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div
-                            class="bg-emerald-50/50 border border-emerald-100 p-8 rounded-3xl transition-all hover:shadow-sm">
-                            <div class="flex items-center gap-4 mb-8">
-                                <div
-                                    class="size-12 bg-emerald-600 text-white rounded-full flex items-center justify-center shrink-0 shadow-inner">
-                                    <i class="fas fa-history text-xl"></i>
-                                </div>
-                                <h3 class="text-xl font-bold tracking-tight text-slate-900">Returns & Refunds</h3>
-                            </div>
-
-                            <ul class="space-y-4 text-[15px] text-slate-700">
-                                <li class="flex items-start gap-3">
-                                    <i class="fas fa-check text-emerald-500 text-xs mt-1"></i>
-                                    <span><strong class="text-slate-900">30-day</strong> hassle-free returns</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fas fa-check text-emerald-500 text-xs mt-1"></i>
-                                    <span>Full refund or exchange available</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fas fa-check text-emerald-500 text-xs mt-1"></i>
-                                    <span>Free return shipping on defective items</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fas fa-check text-emerald-500 text-xs mt-1"></i>
-                                    <span>Easy online return process</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-
-                    <div
-                        class="bg-slate-50 border border-slate-100 p-6 rounded-3xl flex items-center gap-5 transition-all hover:shadow-sm">
-                        <div
-                            class="size-12 bg-slate-200 text-slate-600 rounded-full flex items-center justify-center shrink-0 shadow-inner">
-                            <i class="fas fa-shield-alt text-xl"></i>
-                        </div>
-                        <div class="flex-1 space-y-1">
-                            <h3 class="text-lg font-bold text-slate-900">Buyer Protection Guarantee</h3>
-                            <p class="text-[14px] text-slate-600 leading-relaxed">
-                                Get a full refund if your order doesn't arrive or isn't as described. We ensure your
-                                shopping experience
-                                is safe and secure.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                <app-shipping [productDetails]="productDetails()"></app-shipping>
                 }
             </div>
         </div>
+
+        <app-related-products [productDetails]="productDetails()"></app-related-products>
     </div>
 
 </section>
