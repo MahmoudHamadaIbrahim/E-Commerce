@@ -10,18 +10,18 @@ export class CategoriesService {
   private readonly httpClient = inject(HttpClient);
 
   getAllCategories(): Observable<any> {
-    return this.httpClient.get(environment.baseUrl + `/api/v1/categories`);
+    return this.httpClient.get(`${environment.baseUrl}/api/v1/categories`);
   }
 
   getSubCategoriesOnCategory(id: string): Observable<any> {
-    return this.httpClient.get(environment.baseUrl + `/api/v1/categories/${id}/subcategories`);
+    return this.httpClient.get(`${environment.baseUrl}/api/v1/categories/${id}/subcategories`);
   }
 
   getSpecificSubCategoriesOnCategory(id: string): Observable<any> {
-    return this.httpClient.get(environment.baseUrl + `/api/v1/subcategories/${id}`);
+    return this.httpClient.get(`${environment.baseUrl}/api/v1/subcategories/${id}`);
   }
 
   getSpecificCategory(id: string): Observable<any> {
-    return this.httpClient.get(environment.baseUrl + `/api/v1/categories/${id}`);
+    return this.httpClient.get(`${environment.baseUrl}/api/v1/categories/${id}`);
   }
 }

@@ -40,6 +40,7 @@ export class LoginComponent {
           if (res.message === 'success') {
             localStorage.setItem('freshToken', res.token);
             localStorage.setItem('user', JSON.stringify(res.user));
+            this.authService.isLogged.set(true);
             this.router.navigate(['/']);
           }
         },
