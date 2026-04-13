@@ -8,6 +8,64 @@ export const routes: Routes = [
     title: 'Home Page',
   },
   {
+    path: 'shop',
+    loadComponent: () => import('./features/shop/shop.component').then((m) => m.ShopComponent),
+    title: 'Shop',
+  },
+  {
+    path: 'categories',
+    loadComponent: () =>
+      import('./features/categories/categories.component').then((m) => m.CategoriesComponent),
+    title: 'Categories',
+  },
+  {
+    path: 'checkout/:id',
+    loadComponent: () =>
+      import('./features/checkout/checkout.component').then((m) => m.CheckoutComponent),
+    title: 'Checkout',
+    canActivate: [authGuard],
+  },
+  {
+    path: 'brands',
+    loadComponent: () =>
+      import('./features/brands/brands.component').then((m) => m.BrandsComponent),
+    title: 'Brands',
+  },
+  {
+    path: 'specificbrand/:id',
+    loadComponent: () =>
+      import('./features/specific-brand/specific-brand.component').then(
+        (m) => m.SpecificBrandComponent,
+      ),
+    title: 'Specific Brand',
+  },
+  {
+    path: 'wishlist',
+    loadComponent: () =>
+      import('./features/wishlist/wishlist.component').then((m) => m.WishlistComponent),
+    title: 'Your Wishlist',
+    canActivate: [authGuard],
+  },
+  {
+    path: 'cart',
+    loadComponent: () => import('./features/cart/cart.component').then((m) => m.CartComponent),
+    title: 'Shopping Cart',
+    canActivate: [authGuard],
+  },
+  {
+    path: 'details/:id/:slug',
+    loadComponent: () =>
+      import('./features/details/details.component').then((m) => m.DetailsComponent),
+    title: 'Product Details',
+  },
+  {
+    path: 'allorders',
+    loadComponent: () =>
+      import('./features/orders/orders.component').then((m) => m.OrdersComponent),
+    title: 'Your Orders',
+    canActivate: [authGuard],
+  },
+  {
     path: 'login',
     loadComponent: () => import('./features/login/login.component').then((m) => m.LoginComponent),
     title: 'Login',
@@ -27,56 +85,6 @@ export const routes: Routes = [
     title: 'Reset Password',
   },
   {
-    path: 'cart',
-    loadComponent: () => import('./features/cart/cart.component').then((m) => m.CartComponent),
-    title: 'Shopping Cart',
-    canActivate: [authGuard],
-  },
-  {
-    path: 'wishlist',
-    loadComponent: () =>
-      import('./features/wishlist/wishlist.component').then((m) => m.WishlistComponent),
-    title: 'Your Wishlist',
-    canActivate: [authGuard],
-  },
-  {
-    path: 'checkout/:id',
-    loadComponent: () =>
-      import('./features/checkout/checkout.component').then((m) => m.CheckoutComponent),
-    title: 'Checkout',
-    canActivate: [authGuard],
-  },
-  {
-    path: 'allorders',
-    loadComponent: () =>
-      import('./features/orders/orders.component').then((m) => m.OrdersComponent),
-    title: 'Your Orders',
-    canActivate: [authGuard],
-  },
-  {
-    path: 'shop',
-    loadComponent: () => import('./features/shop/shop.component').then((m) => m.ShopComponent),
-    title: 'Shop',
-  },
-  {
-    path: 'products',
-    loadComponent: () =>
-      import('./features/products/products.component').then((m) => m.ProductsComponent),
-    title: 'Products',
-  },
-  {
-    path: 'details/:id/:slug',
-    loadComponent: () =>
-      import('./features/details/details.component').then((m) => m.DetailsComponent),
-    title: 'Product Details',
-  },
-  {
-    path: 'categories',
-    loadComponent: () =>
-      import('./features/categories/categories.component').then((m) => m.CategoriesComponent),
-    title: 'Categories',
-  },
-  {
     path: 'subcategory/:id',
     loadComponent: () =>
       import('./features/subcategory/subcategory.component').then((m) => m.SubcategoryComponent),
@@ -91,18 +99,10 @@ export const routes: Routes = [
     title: 'Specific Categories',
   },
   {
-    path: 'brands',
+    path: 'products',
     loadComponent: () =>
-      import('./features/brands/brands.component').then((m) => m.BrandsComponent),
-    title: 'Brands',
-  },
-  {
-    path: 'specificbrand/:id',
-    loadComponent: () =>
-      import('./features/specific-brand/specific-brand.component').then(
-        (m) => m.SpecificBrandComponent,
-      ),
-    title: 'Specific Brand',
+      import('./features/products/products.component').then((m) => m.ProductsComponent),
+    title: 'Products',
   },
   {
     path: 'contact',
