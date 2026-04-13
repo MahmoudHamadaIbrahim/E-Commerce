@@ -1,4 +1,4 @@
-import { CurrencyPipe, isPlatformBrowser } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 import { Product } from '../../../../core/models/product.interface';
 import { ProductsService } from './../../../../core/services/products.service';
 import { Component, computed, inject, input, OnInit, PLATFORM_ID, signal } from '@angular/core';
@@ -19,7 +19,6 @@ export class ProductComponent implements OnInit {
   private readonly toastrService = inject(ToastrService);
   private readonly cartService = inject(CartService);
   private readonly wishlistService = inject(WishlistService);
-  private readonly platformId = inject(PLATFORM_ID);
   wishlistIds = computed(() => this.wishlistService.wishlistIds());
   gridCols = input('sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5');
   productList = signal<Product[]>([]);
@@ -48,8 +47,20 @@ export class ProductComponent implements OnInit {
   }
 
   pageChange(pageNum: number): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
     this.updateProducts(pageNum);
+    setTimeout(() => {
+      const element = document.getElementById('productsSection');
+
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        window.scrollTo({
+          top: rect.top + scrollTop - 100,
+          behavior: 'smooth',
+        });
+      }
+    }, 200);
   }
 
   addToWishlist(id: string): void {
