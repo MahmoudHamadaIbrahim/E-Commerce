@@ -48,6 +48,7 @@ export class ProductComponent implements OnInit {
   }
 
   pageChange(pageNum: number): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     this.updateProducts(pageNum);
   }
 
