@@ -28,8 +28,25 @@ export class NavbarComponent {
     if (isPlatformBrowser(this.platformId)) {
       if (localStorage.getItem('freshToken')) {
         this.authService.isLogged.set(true);
+        this.getInitialData();
       }
     }
+  }
+
+  getInitialData(): void {
+    this.cartService.getLoggedUserCart().subscribe({
+      next: (res) => {
+        this.cartService.cartCount.set(res.numOfCartItems);
+      },
+    });
+
+    this.wishlistService.getLoggedUserWishlist().subscribe({
+      next: (res) => {
+        this.wishlistService.wishCount.set(res.data.length);
+        const ids = res.data.map((item: any) => item._id);
+        this.wishlistService.wishlistIds.set(ids);
+      },
+    });
   }
 
   logOut(): void {
