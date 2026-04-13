@@ -1,0 +1,7 @@
+/
+/home
+/shop
+/categories
+/brands
+/products
+/contact

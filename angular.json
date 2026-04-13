@@ -46,6 +46,10 @@
             },
             "ssr": {
               "entry": "src/server.ts"
+            },
+            "prerender": {
+              "discoverRoutes": false,
+              "routesFile": "routes.txt"
             }
           },
           "configurations": {
