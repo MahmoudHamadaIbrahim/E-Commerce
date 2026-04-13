@@ -1,0 +1,96 @@
+<div class="min-h-screen bg-gray-50">
+
+    <section class="bg-primary py-12 px-6 md:px-12 text-white">
+        <div class="container mx-auto max-w-6xl">
+            <nav class="text-sm mb-6 opacity-90">
+                <a routerLink="/">Home</a> /
+                <a routerLink="/brands">Brands</a> /
+                <span class="font-semibold">{{ brandData?.name }}</span>
+            </nav>
+
+            <div class="flex items-center gap-6">
+                <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center p-2 shadow-lg">
+                    <img [src]="brandData?.image" [alt]="brandData?.name" class="max-w-full max-h-full object-contain">
+                </div>
+                <div>
+                    <h1 class="text-4xl font-bold">{{ brandData?.name }}</h1>
+                    <p class="text-green-50 opacity-90 mt-1">Shop {{ brandData?.name }} products</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container mx-auto max-w-6xl py-10 px-6">
+
+        <div class="flex items-center gap-4 mb-8">
+            <div class="flex items-center gap-2 text-gray-600 font-medium">
+                <i class="fas fa-filter"></i> Active Filters:
+            </div>
+            <div
+                class="flex items-center gap-2 bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-bold border border-purple-200">
+                {{ brandData?.name }}
+                <button class="hover:text-purple-900"><i class="fas fa-times"></i></button>
+            </div>
+            <button class="text-sm text-gray-400 hover:text-red-500 underline underline-offset-4">Clear all</button>
+        </div>
+
+        <p class="text-gray-500 mb-6 font-medium">Showing {{ products.length }} products</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+
+            @for (product of products; track product._id) {
+            <div
+                class="bg-white border border-gray-100 rounded-3xl p-4 shadow-sm hover:shadow-md transition-all group relative">
+
+                <div class="absolute right-4 top-4 flex flex-col gap-2 z-10 ">
+                    <button (click)="addToWishlist(product._id)"
+                        class="cursor-pointer w-9 h-9 shadow-md rounded-full flex items-center justify-center transition-all"
+                        [style.color]="wishlistIds().includes(product._id) ? 'red' : 'gray'">
+                        <i class="fa-heart" [class.fas]="wishlistIds().includes(product._id)"
+                            [class.far]="!wishlistIds().includes(product._id)"></i>
+                    </button>
+                    <button
+                        class="w-9 h-9 bg-white cursor-pointer border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-green-500 shadow-sm transition-colors">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                    <button [routerLink]="['/details', product._id, product.slug]"
+                        class="w-9 h-9 bg-white cursor-pointer border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-blue-500 shadow-sm transition-colors">
+                        <i class="far fa-eye"></i>
+                    </button>
+                </div>
+
+                <div class="h-48 flex items-center justify-center mb-4">
+                    <img [src]="product.imageCover" [alt]="product.title" class="max-h-full object-contain">
+                </div>
+
+                <span class="text-xs text-blue-400 font-semibold">{{ product.category.name }}</span>
+                <h3 class="font-bold text-gray-800 text-sm mt-1 line-clamp-2">{{ product.title }}</h3>
+
+                <div class="flex items-center gap-1 mt-2">
+                    <div class="flex text-yellow-400 text-xs">
+                        @for (num of [1, 2, 3, 4, 5]; track $index) {
+                        <i class="fas fa-star" [class.text-yellow-400]="num <= product.ratingsAverage"
+                            [class.text-gray-300]="num > product.ratingsAverage">
+                        </i>
+                        }
+                    </div>
+                    <span class="text-xs text-gray-400 font-bold">{{ product.ratingsAverage }} ({{
+                        product.ratingsQuantity }})</span>
+                </div>
+
+                <div class="flex items-center justify-between mt-4">
+                    <div>
+                        <span class="block text-xl font-black text-gray-900">{{ product.price | currency }}</span>
+                        <span class="text-xs font-bold text-gray-400">EGP</span>
+                    </div>
+                    <button (click)="addToCart(product.id)"
+                        class="w-10 h-10 cursor-pointer bg-primary text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors shadow-lg shadow-green-100">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+            }
+
+        </div>
+    </section>
+</div>

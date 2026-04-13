@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,20 @@ export class AuthService {
   private readonly router = inject(Router);
   private readonly platformId = inject(PLATFORM_ID);
   isLogged = signal<boolean>(false);
+
+  getCurrentUserId(): string | null {
+    const token = localStorage.getItem('freshToken');
+
+    if (token) {
+      try {
+        const decodedToken: any = jwtDecode(token);
+        return decodedToken.id || decodedToken._id;
+      } catch (error) {
+        return null;
+      }
+    }
+    return null;
+  }
 
   signOut(): void {
     if (isPlatformBrowser(this.platformId)) {

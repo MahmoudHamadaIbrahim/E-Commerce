@@ -1,8 +1,19 @@
-import { Component, ElementRef, inject, input, OnInit, signal, ViewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  OnInit,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { Product } from '../../../../core/models/product.interface';
 import { ProductsService } from '../../../../core/services/products.service';
 import { RouterLink } from '@angular/router';
 import { DecimalPipe } from '@angular/common';
+import { WishlistService } from '../../../../core/services/wishlist.service';
 
 @Component({
   selector: 'app-related-products',
@@ -10,14 +21,40 @@ import { DecimalPipe } from '@angular/common';
   templateUrl: './related-products.component.html',
   styleUrl: './related-products.component.css',
 })
-export class RelatedProductsComponent implements OnInit {
+export class RelatedProductsComponent {
   private readonly productsService = inject(ProductsService);
+  private readonly wishlistService = inject(WishlistService);
+  wishlistIds = computed(() => this.wishlistService.wishlistIds());
   relatedProducts = signal<Product[]>([]);
   productDetails = input.required<Product>();
   @ViewChild('slider') slider!: ElementRef;
 
-  ngOnInit(): void {
-    this.getRelatedProducts();
+  constructor() {
+    effect(() => {
+      if (this.productDetails()?.category?._id) {
+        this.getRelatedProducts();
+      }
+    });
+  }
+
+  addToWishlist(id: string): void {
+    const isInWishlist = this.wishlistIds().includes(id);
+
+    if (isInWishlist) {
+      this.wishlistService.removeProductFromWishlist(id).subscribe({
+        next: (res: any) => {
+          this.wishlistService.wishlistIds.set([...res.data]);
+          this.wishlistService.wishCount.set(res.data.length);
+        },
+      });
+    } else {
+      this.wishlistService.addProuctToWishlist(id).subscribe({
+        next: (res: any) => {
+          this.wishlistService.wishlistIds.set([...res.data]);
+          this.wishlistService.wishCount.set(res.data.length);
+        },
+      });
+    }
   }
 
   getRelatedProducts(): void {

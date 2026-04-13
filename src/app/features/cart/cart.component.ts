@@ -14,6 +14,7 @@ export class CartComponent implements OnInit {
   private readonly cartService = inject(CartService);
   private readonly platformId = inject(PLATFORM_ID);
   cartDetails = signal<Cart>({} as Cart);
+
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       this.getCartItems();
@@ -48,6 +49,8 @@ export class CartComponent implements OnInit {
     this.cartService.clearCart().subscribe({
       next: (res) => {
         this.cartDetails.set(res.data);
+        this.cartService.cartCount.set(0);
+        this.cartService.cartProductIds.set(new Set());
       },
     });
   }

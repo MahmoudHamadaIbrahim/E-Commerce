@@ -38,12 +38,14 @@
                         }
 
                         <img [src]="product.imageCover" [alt]="product.title"
-                            class="w-full h-64 object-contain group-hover:scale-105 transition-transform duration-500" />
+                            class="max-w-[80%] max-h-[80%] object-contain group-hover:scale-105 transition-transform duration-500" />
 
                         <div class="absolute top-0 right-0 flex flex-col gap-2 p-0">
-                            <button
-                                class="w-9 h-9 bg-white shadow-sm border border-gray-100 rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-all cursor-pointer border-none">
-                                <i class="far fa-heart"></i>
+                            <button (click)="addToWishlist(product._id)"
+                                class="cursor-pointer w-9 h-9 shadow-md rounded-full flex items-center justify-center transition-all"
+                                [style.color]="wishlistIds().includes(product._id) ? 'red' : 'gray'">
+                                <i class="fa-heart" [class.fas]="wishlistIds().includes(product._id)"
+                                    [class.far]="!wishlistIds().includes(product._id)"></i>
                             </button>
                             <button
                                 class="w-9 h-9 bg-white shadow-sm border border-gray-100 rounded-full flex items-center justify-center text-gray-400 hover:text-emerald-500 transition-all cursor-pointer border-none">

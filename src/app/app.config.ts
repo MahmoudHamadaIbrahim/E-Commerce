@@ -12,7 +12,6 @@ import { provideToastr } from 'ngx-toastr';
 import { errorInterceptor } from './core/interceptors/error-interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { loadingInterceptor } from './core/interceptors/loading-interceptor';
-import { successInterceptor } from './core/interceptors/success-interceptor';
 import { headerInterceptor } from './core/interceptors/header-interceptor';
 
 export const appConfig: ApplicationConfig = {
@@ -26,12 +25,7 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideHttpClient(
       withFetch(),
-      withInterceptors([
-        errorInterceptor,
-        loadingInterceptor,
-        successInterceptor,
-        headerInterceptor,
-      ]),
+      withInterceptors([loadingInterceptor, errorInterceptor, headerInterceptor]),
     ),
     provideToastr(),
     importProvidersFrom(NgxSpinnerModule),

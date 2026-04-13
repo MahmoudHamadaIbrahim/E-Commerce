@@ -2,6 +2,7 @@ import { Component, computed, inject, input, OnInit, signal } from '@angular/cor
 import { ProductsService } from '../../../../../../core/services/products.service';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DatePipe, DecimalPipe } from '@angular/common';
+import { get } from 'http';
 
 @Component({
   selector: 'app-reviews',
@@ -62,11 +63,11 @@ export class ReviewsComponent implements OnInit {
 
     this.productsService.createReview(productId, data).subscribe({
       next: (res) => {
+        this.getReviews(productId);
         this.allReviews.update((prev) => [res.data, ...prev]);
         this.userReview.reset();
         this.userRating.set(5);
       },
-      error: (err) => console.error(err),
     });
   }
 

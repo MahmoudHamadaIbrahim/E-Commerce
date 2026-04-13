@@ -19,7 +19,7 @@ export const routes: Routes = [
     title: 'Categories',
   },
   {
-    path: 'checkout',
+    path: 'checkout/:id',
     loadComponent: () =>
       import('./features/checkout/checkout.component').then((m) => m.CheckoutComponent),
     title: 'Checkout',
@@ -30,6 +30,14 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/brands/brands.component').then((m) => m.BrandsComponent),
     title: 'Brands',
+  },
+  {
+    path: 'specificbrand/:id',
+    loadComponent: () =>
+      import('./features/specific-brand/specific-brand.component').then(
+        (m) => m.SpecificBrandComponent,
+      ),
+    title: 'Specific Brand',
   },
   {
     path: 'wishlist',
@@ -51,7 +59,7 @@ export const routes: Routes = [
     title: 'Product Details',
   },
   {
-    path: 'orders',
+    path: 'allorders',
     loadComponent: () =>
       import('./features/orders/orders.component').then((m) => m.OrdersComponent),
     title: 'Your Orders',
@@ -95,6 +103,12 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/products/products.component').then((m) => m.ProductsComponent),
     title: 'Products',
+  },
+  {
+    path: 'contact',
+    loadComponent: () =>
+      import('./features/contact/contact.component').then((m) => m.ContactComponent),
+    title: 'Contact Us',
   },
   {
     path: '**',

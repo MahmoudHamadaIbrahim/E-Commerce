@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+
 
 @import 'tailwindcss';
 @import "flowbite/src/themes/default";
@@ -28,4 +28,108 @@ body {
 [drawer-backdrop] {
     z-index: 80 !important;
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+
+.ngx-pagination {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-top: 2rem !important;
+    padding-left: 0 !important;
+    list-style-type: none !important;
+}
+
+.ngx-pagination li {
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 36px !important;
+    height: 36px !important;
+    margin: 0 5px !important;
+    border-radius: 50% !important;
+    background: transparent !important;
+    border: none !important;
+}
+
+.ngx-pagination li a {
+    color: #333 !important;
+    text-decoration: none !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50% !important;
+    transition: all 0.3s ease !important;
+    background: transparent !important;
+}
+
+
+.ngx-pagination li a:hover {
+    background-color: #0aad0a !important;
+    color: white !important;
+    box-shadow: 0 0 0 6px rgba(10, 173, 10, 0.15) !important;
+    text-decoration: none !important;
+}
+
+
+.ngx-pagination li.current {
+    background-color: #0aad0a !important;
+    color: white !important;
+    box-shadow: 0 0 0 6px rgba(10, 173, 10, 0.15) !important;
+    font-weight: 500 !important;
+    border-radius: 50% !important;
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+}
+
+.ngx-pagination .pagination-previous a::before,
+.ngx-pagination .pagination-previous.disabled::before,
+.ngx-pagination .pagination-next a::after,
+.ngx-pagination .pagination-next.disabled::after {
+    display: none !important;
+}
+
+.ngx-pagination .pagination-previous,
+.ngx-pagination .pagination-next {
+    font-size: 20px !important;
+    background: transparent !important;
+    width: auto !important;
+}
+
+.ngx-pagination .pagination-previous a,
+.ngx-pagination .pagination-next a {
+    width: 36px !important;
+    height: 36px !important;
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-radius: 50% !important;
+    transition: all 0.3s ease !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.ngx-pagination .pagination-previous a:hover,
+.ngx-pagination .pagination-next a:hover {
+    background-color: #0aad0a !important;
+    color: white !important;
+    box-shadow: 0 0 0 6px rgba(10, 173, 10, 0.15) !important;
+    text-decoration: none !important;
+}
+
+.ngx-pagination .disabled {
+    color: #ccc !important;
+    cursor: not-allowed !important;
+    background: transparent !important;
+}
+
+.ngx-pagination .small-screen {
+    display: none !important;
 }
