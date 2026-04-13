@@ -11,10 +11,10 @@ A high-performance, fully functional E-commerce web application built using **An
 * **Interactive UI:** Smooth transitions and notifications using Ngx-Toastr and Swiper.js.
 
 ### 🛠️ Tech Stack
-* **Framework:** Angular (v19+)
-* **Styling:** Tailwind CSS & FontAwesome
-* **State Management:** Angular Signals & Computed Properties
-* **Deployment:** Netlify (with SSR configuration)
-* **Tools:** Ngx-Pagination, Ngx-Toastr, Swiper
+* **Framework:** Angular (v19+)..
+* **Styling:** Tailwind CSS & FontAwesome.
+* **State Management:** Angular Signals & Computed Properties.
+* **Deployment:** Netlify (with SSR configuration).
+* **Tools:** Ngx-Pagination, Ngx-Toastr, Swiper.
 
 * Live Demo 🚀 : https://ecommerce-mahmoud-hamada.netlify.app
