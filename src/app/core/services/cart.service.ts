@@ -38,8 +38,9 @@ export class CartService {
   }
 
   createVisaOrder(cartId: string, data: object): Observable<any> {
+    const currentUrl = window.location.origin;
     return this.httpClient.post(
-      `${environment.baseUrl}/api/v1/orders/checkout-session/${cartId}?url=${environment.url}`,
+      `${environment.baseUrl}/api/v1/orders/checkout-session/${cartId}?url=${currentUrl}`,
       data,
     );
   }
