@@ -8,7 +8,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(req).pipe(
     catchError((err) => {
-      toastrService.error(err.error.message);
+      toastrService.error(err.error.message, 'FreshChart', { progressBar: true, timeOut: 2000 });
 
       return throwError(() => err);
     }),

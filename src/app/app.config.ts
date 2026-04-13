@@ -13,6 +13,7 @@ import { errorInterceptor } from './core/interceptors/error-interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { loadingInterceptor } from './core/interceptors/loading-interceptor';
 import { headerInterceptor } from './core/interceptors/header-interceptor';
+import { successInterceptor } from './core/interceptors/success-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,7 +26,12 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideHttpClient(
       withFetch(),
-      withInterceptors([loadingInterceptor, errorInterceptor, headerInterceptor]),
+      withInterceptors([
+        loadingInterceptor,
+        errorInterceptor,
+        successInterceptor,
+        headerInterceptor,
+      ]),
     ),
     provideToastr(),
     importProvidersFrom(NgxSpinnerModule),
