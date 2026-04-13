@@ -17,4 +17,4 @@ A high-performance, fully functional E-commerce web application built using **An
 * **Deployment:** Netlify (with SSR configuration)
 * **Tools:** Ngx-Pagination, Ngx-Toastr, Swiper
 
-* Live Demo 🚀 : https://your-site-name.netlify.app
+* Live Demo 🚀 : https://ecommerce-mahmoud-hamada.netlify.app
